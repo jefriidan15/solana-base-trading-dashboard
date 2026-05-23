@@ -33,7 +33,7 @@ export async function getAllKeys(): Promise<StoredKeys> {
   for (const keyName of KEY_NAMES) {
     const value = await getKey(keyName);
     if (value) {
-      keys[keyName] = value as StoredKeys[typeof keyName];
+      (keys as Record<string, string>)[keyName] = value;
     }
   }
   return keys;
@@ -56,6 +56,6 @@ export function hasStoredKeys(): boolean {
   );
 }
 
-export async function verifyPassword(_password: string): Promise<boolean> {
+export async function verifyPassword(): Promise<boolean> {
   return true;
 }
